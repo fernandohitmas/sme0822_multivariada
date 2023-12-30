@@ -1,0 +1,36 @@
+---
+title: "aula_pratica"
+output: html_document
+date: "2023-11-22"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(data.table)
+library(readr)
+```
+
+Considere o arquivo de dados amostra_banco_distrito.csv disponível em https://github.com/cibelerusso/Datasets/blob/main/amostra_banco_distrito.csv
+
+Você deve desenvolver uma análise de correspondência múltipla, com pelo menos três variáveis, buscando maximizar a inércia total das duas coordenadas principais, 
+
+$$\frac{\sum_{i=1}^{2}\lambda_i}{\sum_{i=1}^{k}\lambda_i^2}$$
+
+ em que k é o número total de variáveis adicionadas na análise.
+
+Considere, por exemplo, métodos alternativos para categorizar as variáveis contínuas existentes na base de dados, como técnicas baseadas em análise de agrupamentos. Se achar necessário, pode criar novas variáveis.
+
+```{r leitura dos dados}
+df <- read_delim('https://raw.githubusercontent.com/cibelerusso/Datasets/main/amostra_banco_distrito.csv', delim=",", locale = locale(decimal_mark = ","))
+dt <- as.data.table(df)
+
+dt$Saldo_poupança <- ifelse(dt$Saldo_poupança > 0,1,0)
+head(dt) 
+```
+
+```{r ved, }
+
+summary(df[2:11])
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
